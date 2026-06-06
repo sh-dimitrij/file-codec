@@ -1,12 +1,12 @@
 import type { Mode, FileEntry } from './types'
 
 export function detectMode(file: File): Mode {
-  return file.name.endsWith('.enc') ? 'decrypt' : 'encrypt'
+  return file.name.endsWith('.fcd') ? 'decrypt' : 'encrypt'
 }
 
 export function outputName(file: File, mode: Mode): string {
-  if (mode === 'encrypt') return file.name + '.enc'
-  if (file.name.endsWith('.enc')) return file.name.slice(0, -4)
+  if (mode === 'encrypt') return file.name + '.fcd'
+  if (file.name.endsWith('.fcd')) return file.name.slice(0, -4)
   return 'decrypted_' + file.name
 }
 

@@ -6,7 +6,8 @@ export default defineConfig({
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['icons/*.png'],
+      // Only active in production build, not dev
+      devOptions: { enabled: false },
       manifest: {
         name: 'FileCodec — AES-256 Encryption',
         short_name: 'FileCodec',
@@ -15,25 +16,23 @@ export default defineConfig({
         background_color: '#0d0d14',
         display: 'standalone',
         start_url: '/file-codec/',
+        scope: '/file-codec/',
         icons: [
-          { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' },
-          { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' }
+          {
+            src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%230d0d14"/><text y=".9em" font-size="80">🔒</text></svg>',
+            sizes: '192x192',
+            type: 'image/svg+xml'
+          }
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}']
+        globPatterns: ['**/*.{js,css,html,svg,woff2}'],
+        navigateFallback: '/file-codec/index.html',
       }
     })
   ],
   build: {
     target: 'es2022',
     sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          crypto: ['./src/crypto/engine.ts']
-        }
-      }
-    }
   }
 })

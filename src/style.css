@@ -477,3 +477,20 @@ code, pre { font-family: var(--font-mono); }
   .header-meta { display: none; }
   .hash-val { font-size: 0.65rem; }
 }
+
+/* ── Drop zone label layout fix ─────────────────────────────────────────────── */
+#file-input {
+  /* Visually hidden but still functional via <label for> */
+  position: absolute;
+  width: 1px; height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.drop-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  width: 100%;
+}
