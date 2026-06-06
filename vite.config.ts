@@ -18,11 +18,9 @@ export default defineConfig({
         start_url: '/file-codec/',
         scope: '/file-codec/',
         icons: [
-          {
-            src: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%230d0d14"/><text y=".9em" font-size="80">🔒</text></svg>',
-            sizes: '192x192',
-            type: 'image/svg+xml'
-          }
+          { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' },
+          { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' },
+          { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' }
         ]
       },
       workbox: {

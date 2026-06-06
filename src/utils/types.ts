@@ -2,20 +2,25 @@ export type Mode = 'encrypt' | 'decrypt'
 
 export type FileStatus = 'pending' | 'processing' | 'done' | 'error'
 
+export type PreviewType = 'image' | 'text' | 'audio' | 'video' | 'pdf' | 'none'
+
 export interface FileEntry {
   id: string
   file: File
-  mode: Mode          // auto-detected or manual
+  mode: Mode
   status: FileStatus
-  progress: number    // 0–100
+  progress: number
   progressLabel: string
   outputName: string
+  selected: boolean       // for batch selection
   sha256Input?: string
   sha256Output?: string
   errorMsg?: string
-  previewUrl?: string // object URL for image/text preview
-  previewType?: 'image' | 'text' | 'none'
+  previewType?: PreviewType
+  previewUrl?: string
   previewText?: string
+  pendingDownload?: Uint8Array
+  downloaded?: boolean
 }
 
 export interface HistoryEntry {
@@ -31,10 +36,18 @@ export interface HistoryEntry {
   errorMsg?: string
 }
 
+export interface ModalState {
+  open: boolean
+  fileIds: string[]   // ordered list of previewable file IDs
+  currentIndex: number
+}
+
 export interface AppState {
   password: string
   showPassword: boolean
+  showPreview: boolean  // global preview toggle
   files: FileEntry[]
   history: HistoryEntry[]
   activeTab: 'files' | 'history'
+  modal: ModalState
 }
